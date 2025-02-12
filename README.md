@@ -11,4 +11,4 @@ classe adicionada na funcionalidade de user_profile
 
 classe adicionada na funcionalidade de shelter_profile
   Shelter
-  A classe shelter name, local, email, pets (que apresenta a quantidade de pets disponiveis) e us
+  A classe shelter name, local, email, pets (que apresenta a quantidade de pets disponiveis) e us(uma breve descrição do abrigo)
