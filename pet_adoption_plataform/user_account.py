@@ -14,10 +14,7 @@ class User:
         self.email = email
     
     def show_info(self):
-        print(f"Name: {self.name}")
-        print(f"Age: {self.age}")
-        print(f"address: {self.address}")
-        print(f"email: {self.email}")
+        print(f"Name: {self.name}\nAge: {self.age}\nAdress: {self.address}\nEmail: {self.email}")
 
 user = User(user_name, user_age, user_adress, user_email)
 
@@ -31,20 +28,31 @@ def user_profile():
 
         os.system("cls")
 
-        print(f"Name: {user.user_name}\nAge: {user.user_age}\nAdress: {user.user_adress}\nEmail: {user.user_email}")
+        if user.age != 0:
+            user.show_info()
+
+        else:
+            print("You need creat a account!")
 
         escolha = input("--Creat account (1)\n--Change account (2)\n--Return (3)\n")
 
         if escolha == "1":
-            user_name = input("Type your name: ")
-            user_name = user_name.capitalize()
-            user_age = int(input("Type your age: "))
-            user_adress = input("Type your adress: ")
-            user_email = input("Type your email: ")
-            user = User(user_name, user_age, user_adress, user_email)
+            user.name = input("Type your name: ").capitalize()
+            user.age = int(input("Type your age: "))
+            while user.age == 0 or user.age > 99:
+                user.age = int(input("Type a valid age: "))
+            user.address = input("Type your adress: ")
+            user.email = input("Type your email: ")
 
         elif escolha == "2":
-            changers()
+            if user.age != 0:
+                changers()
+            else:
+                while True:
+                    print("You need creat a account!")
+                    input("Type enter to continue")
+                    break
+        
         elif escolha == "3":
             break
         print("\n")
@@ -60,18 +68,18 @@ def changers():
     print("Change your name? y/n: ")
     control = input()
     if control == "y":
-        user_name = input("Type your name: ")
-        user_name = user_name.capitalize()
+        user.name = input("Type your name: ").capitalize()
     print("Change your age? y/n: ")
     control = input()
     if control == "y":
-        user_age = int(input("Digite sua idade: "))
+        user.age = int(input("Type your age: "))
+        while user.age == 0 or user_age > 99:
+                user.age = int(input("Type a valid age: "))
     print("Change adress? y/n: ")
     control = input()
     if control == "y":
-        user_adress = input("Type your adress:")
+        user.address = input("Type your adress:")
     print("Change email? y/n: ")
     control = input()
     if control == "y":
-        user_email = input("Type your email: ")
-    user = User(user_name, user_age, user_adress, user_email)
+        user.email = input("Type your email: ")
