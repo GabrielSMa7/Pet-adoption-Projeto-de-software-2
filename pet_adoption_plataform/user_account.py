@@ -20,10 +20,6 @@ user = User(user_name, user_age, user_adress, user_email)
 
 def user_profile():
     while True:
-        global user_name
-        global user_age
-        global user_adress
-        global user_email
         global user
 
         os.system("cls")
@@ -59,10 +55,6 @@ def user_profile():
 
 def changers():
 
-    global user_name
-    global user_age
-    global user_adress
-    global user_email
     global user
 
     print("Change your name? y/n: ")
