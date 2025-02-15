@@ -1,36 +1,35 @@
 import os
 from pet_adoption_plataform import search
 
-events = {
-    'Feira de adoção' : {
-        'local' : 'Parque da cidade',
-        'date' : '12/02',
-        'open' : '13:00',
-        'close' : '17:00',
-        'type' : 'adoption'
-    },
-    'Feira de adoção 2' : {
-        'local' : 'Parque da cidade',
-        'date' : '13/02',
-        'open' : '10:00',
-        'close' : '20:00',
-        'type' : 'adoption'
-    },
-    'Feira de vacinação' : {
-        'local' : 'Parque da cidade',
-        'date' : '15/02',
-        'open' : '7:00',
-        'close' : '17:00',
-        'type' : 'vaccination'
-    },
-    'Feira de vacinação 2' : {
-        'local' : 'Parque da cidade',
-        'date' : '12/02',
-        'open' : '8:00',
-        'close' : '10:00',
-        'type' : 'vaccination'
-    },
-}
+class Event:
+    def __init__(self, name, local, date, open, close, type):
+        self.name = name
+        self.local = local
+        self.date = date
+        self.open = open
+        self.close = close
+        self.type = type
+
+    def show_info(self):
+        print(f"Event name: {self.name}")
+        print(f"Local: {self.local}")
+        print(f"Date: {self.date}")
+        print(f"Open: {self.open}")
+        print(f"Close: {self.close}")
+        print(f"Type: {self.type}")
+
+event1 = Event('Feira de adoção', 'Parque da cidade', '12/02', '13:00', '17:00', 'adoption')
+event2 = Event('Feira de adoção 2', 'Parque da cidade', '13/02', '10:00', '20:00', 'adoption')
+event3 = Event('Feira de vacinação', 'Parque da cidade', '15/02', '7:00', '17:00', 'vaccination')
+event4 = Event('Feira de vacinação 2', 'Parque da cidade', '12/02', '8:00', '10:00', 'vaccination')
+
+events = [event1, event2, event3, event4]
+
+def searchevent(nome, lista):
+    for i in lista:
+        if i.name.lower() == nome.lower():
+            return i
+    return None
 
 def show_events():
     global events
@@ -47,12 +46,12 @@ def show_events():
         while True:  
         
             print("What kind of filter?\n--Type")
-            fltrs = input().lower()
+            fltrs = input().lower().strip()
 
             if fltrs.lower() == "type":
                 os.system("cls")
                 print("What kind of type?\n--Adoption\n--Vaccination")
-                spc = input().lower()
+                spc = input().lower().strip()
                 break
             else:
                 os.system("cls")
@@ -66,30 +65,23 @@ def show_events():
         
         os.system("cls")
 
-        for event in events.keys():
-            print(f"Name: {event}")
+        for event in events:
+            print(f"Name: {event.name}")
 
         print("See more informations? y/n")
         info = input().lower()
 
         if info == "y":
             print("Enter the name of the pet you want to see: ")
-            event_choiced = input()
-            event_choiced = event_choiced.lower().capitalize()
-            event_info = events.get(event_choiced)
+            event_choiced = input().lower().capitalize()
+            event_info = searchevent(event_choiced, events)
             
             if not event_info:
                 continue
 
             os.system("cls")
 
-            print(f"\nPet Name: {event_choiced}")
-
-            print(f"Local: {event_info['local']}")
-            print(f"Date: {event_info['date']}")
-            print(f"Open: {event_info['open']}")
-            print(f"Close: {event_info['close']}")
-            print(f"Type: {event_info['type']}")
+            event_info.show_info()
 
             print("--Return (1)\n--Exit (2)")
             

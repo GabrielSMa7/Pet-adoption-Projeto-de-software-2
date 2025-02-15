@@ -5,15 +5,8 @@
 def filtr(list, fltrs, sps):
     
     #cria um dicionario novo para armazenar os itens selecionados
-    newlist = {}
+    newlist = [i for i in list if getattr(i, fltrs, "").lower() == sps.lower()]
 
-    #busca pelos itens vendo se o valor da key é igual ao esperado
-    for item, item_info in list.items():
-        
-        #salva o item encontrado no dicionario criado anteriomente
-        if sps == item_info[fltrs]:
-          newlist[item] = list[item].copy()
-    
     #printa quantos itens tem no dicionario
     print(f"{len(newlist)} pets available!")
     

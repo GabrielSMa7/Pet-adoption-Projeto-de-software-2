@@ -1,57 +1,41 @@
 from pet_adoption_plataform import search
 from pet_adoption_plataform import adoption
+from pet_adoption_plataform import shelter_profile
 import os 
 
-pets = {
-        'Bethoven': { 
-            'age': 7, 
-            'gender': 'male',
-            'color': 'brown and white',
-            'size' : 'big',
-            'type' : 'dog',
-            'shelter' : 'Adocão'
-            },
-        'Garfiel': {
-            'age': 4, 
-            'gender': 'male',
-            'color': 'orange',
-            'size' : 'medium',
-            'type' : 'cat',
-            'shelter' : 'Adocão'
-        },
-        'Snoop': { 
-            'age': 2, 
-            'gender': 'male',
-            'color': 'black and white',
-            'size' : 'small',
-            'type' : 'dog',
-            'shelter' : 'Adocão'
-            },
-        'Lady': { 
-            'age': 2, 
-            'gender': 'female',
-            'color': 'brown',
-            'size' : 'small',
-            'type' : 'dog',
-            'shelter' : 'Amigos de pata'
-            },
-        'Scooby': { 
-            'age': 10, 
-            'gender': 'male',
-            'color': 'brown',
-            'size' : 'big',
-            'type' : 'dog',
-            'shelter' : 'Amigos de pata'
-            },
-        'Marrie': {
-            'age': 1, 
-            'gender': 'female',
-            'color': 'white',
-            'size' : 'small',
-            'type' : 'cat',
-            'shelter' : 'Amigos de pata'
-        },
-    }  
+class Pet:
+    def __init__(self, name, age, gender, color, size, type, shelter):
+        self.name = name
+        self.age = age
+        self.gender = gender
+        self.color = color
+        self.size = size        
+        self.type = type
+        self.shelter = shelter
+
+    def show_info(self):
+        print(f"Name: {self.name}")
+        print(f"age: {self.age}")
+        print(f"Gender: {self.gender}")
+        print(f"color: {self.color}")
+        print(f"type: {self.type}")
+        print(f"Size: {self.size}")
+        print(f"shelter: {self.shelter.name}\n")
+
+pet1 = Pet("Bethoven",7, "male", "brown and white", "big", "dog", shelter_profile.shelter1)
+pet2 = Pet("Garfiel", 4, "male", "orange", "medium", "cat", shelter_profile.shelter1)
+pet3 = Pet("Snoop", 2, "male", "black and white", "small", "dog", shelter_profile.shelter1)
+pet4 = Pet("Lady", 2, "female", "brown", "small", "dog", shelter_profile.shelter2)
+pet5 = Pet("Scooby", 10, "male", "brown", "big", "dog", shelter_profile.shelter2)
+pet6 = Pet("Marrie", 1, "female", "white", "small", "cat", shelter_profile.shelter2)
+
+pets = [pet1, pet2, pet3, pet4, pet5, pet6]        
+
+def searchpet(nome, lista):
+    for i in lista:
+        if i.name.lower() == nome.lower():
+            return i
+    return None
 
 def showpets():
     global pets
@@ -69,7 +53,7 @@ def showpets():
         while True:  
         
             print("What kind of filter?\n--Type\n--Size\n--Gender")
-            fltrs = input() 
+            fltrs = input()
 
             if fltrs.lower() == "type":
                 os.system("cls")
@@ -90,8 +74,8 @@ def showpets():
                 os.system("cls")
                 print("Filter don't found, try again!")
 
-        spc = spc.lower()
-        fltrs = fltrs.lower()
+        spc = spc.strip().lower()
+        fltrs = fltrs.strip().lower()
 
         filter_pets = search.filtr(filter_pets, fltrs, spc)
         print("Apply another filter? y/n")
@@ -101,8 +85,8 @@ def showpets():
         
         os.system("cls")
 
-        for pet in filter_pets.keys():
-            print(f"Name: {pet}")
+        for pet in filter_pets:
+            print(f"Name: {pet.name}")
 
         print("See more informations? y/n")
         info = input().lower()
@@ -110,26 +94,15 @@ def showpets():
         if info == "y":
             print("Enter the name of the pet you want to see: ")
             pet_choiced = input().lower().capitalize()
-            paw_info = filter_pets.get(pet_choiced)
+            paw_info = searchpet(pet_choiced, pets)
             
-            if not paw_info:
+            if paw_info == None:
+                input("Pet dont found")
                 continue
             
             os.system("cls")
 
-            print(f"Pet Name: {pet_choiced}")
-            age = paw_info['age']
-            color = paw_info['color']
-            gender = paw_info['gender']
-            size = paw_info['size']
-            tpe = paw_info['type']
-            shelter = paw_info['shelter']
-
-            print(f"Age: {age}")
-            print(f"Color: {color}")
-            print(f"Gender: {gender}")
-            print(f"Size: {size}")
-            print(f"Type: {tpe}")
+            paw_info.show_info()
 
             print("--Want to adopt this pet? (1)\n--Return (2)\n--Exit (3)")
             
@@ -139,7 +112,7 @@ def showpets():
                 continue
 
             elif choice == "1":
-                adoption.adoption(pet_choiced, shelter)
+                adoption.adoption(paw_info.name, paw_info.shelter)
                 break
             elif choice == "3":
                 break

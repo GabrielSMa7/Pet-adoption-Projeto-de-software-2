@@ -50,13 +50,13 @@ def showcommunity():
                     continue
                 if comment == "2":
                     os.system("cls")
-                    if user_account.user_age == "Unknown":
+                    if user_account.user.age == 00:
                         print("You need to have a account")
                         input()
                         os.system("cls")
                         continue
                     else:
-                        user_profile = user_account.user_name
+                        user_profile = user_account.user.name
                         user_comment = input("Enter your comment: ")
 
                         topic_find["comments"][user_profile] = {"coment" : user_comment}
