@@ -1,6 +1,7 @@
 from pet_adoption_plataform import search
 from pet_adoption_plataform import adoption
 from pet_adoption_plataform import shelter_profile
+from pet_adoption_plataform import clases
 import os 
 
 class Pet:
@@ -30,12 +31,6 @@ pet5 = Pet("Scooby", 10, "male", "brown", "big", "dog", shelter_profile.shelter2
 pet6 = Pet("Marrie", 1, "female", "white", "small", "cat", shelter_profile.shelter2)
 
 pets = [pet1, pet2, pet3, pet4, pet5, pet6]        
-
-def searchpet(nome, lista):
-    for i in lista:
-        if i.name.lower() == nome.lower():
-            return i
-    return None
 
 def showpets():
     global pets
@@ -94,7 +89,7 @@ def showpets():
         if info == "y":
             print("Enter the name of the pet you want to see: ")
             pet_choiced = input().lower().capitalize()
-            paw_info = searchpet(pet_choiced, pets)
+            paw_info = clases.Pet.search_name_in_list(pet_choiced, pets)
             
             if paw_info == None:
                 input("Pet dont found")

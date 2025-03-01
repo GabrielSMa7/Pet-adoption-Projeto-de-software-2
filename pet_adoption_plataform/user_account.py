@@ -1,32 +1,27 @@
 import os
 from pet_adoption_plataform import clases
 
-user_name = "User"
-user_age = 00
-user_adress = "Unknown"
-user_email = "Unknown"
-
-user = clases.User(user_name, user_age, user_adress, user_email)
+users = [""]
 
 def user_profile():
     while True:
-        global user
+        global users
 
         os.system("cls")
 
-        if user.age != 0:
-            user.show_info()
-
-        else:
+        if users == ['']:
             print("You need creat a account!")
+        else:
+            user.User.show_info()
 
         escolha = input("--Creat account (1)\n--Change account (2)\n--Return (3)\n")
 
         if escolha == "1":
-            clases.User.creat()
+            user = clases.User.creat()
+            users.append(user)
         elif escolha == "2":
             if user.age != 0:
-                clases.User.changers()
+                user = clases.User.changers()
             else:
                 while True:
                     print("You need creat a account!")

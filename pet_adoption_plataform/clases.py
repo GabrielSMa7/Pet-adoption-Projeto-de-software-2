@@ -5,12 +5,14 @@ class Base:
     def show_info(self):
         print(f"Name:{self.name}")
     
+    @staticmethod
     def search_name_in_list(nome, lista):
         for i in lista:
             if i.name.lower() == nome.lower():
                 return i
         return None
 
+    @staticmethod
     def showlist(list):
         for i in list:
             print(f"{i.name}")
@@ -42,32 +44,27 @@ class User(Base):
     def show_info(self):
         print(f"Name: {self.name}\nAge: {self.age}\nAdress: {self.address}\nEmail: {self.email}")
     
-    def creat(self):
-        self.name = input("Type your name: ").capitalize()
-        self.age = int(input("Type your age: "))
-        while self.age == 0 or self.age > 99:
-            self.age = int(input("Type a valid age: "))
-        self.address = input("Type your adress: ")
-        self.email = input("Type your email: ")
+    @classmethod
+    def creat(cls):
+        name = input("Type your name: ").capitalize()
+        age = int(input("Type your age: "))
+        while age == 0 or age > 99:
+            age = int(input("Type a valid age: "))
+        address = input("Type your adress: ")
+        email = input("Type your email: ")
+
+        return cls(name, age, address, email)
 
     def changers(self):
-        print("Change your name? y/n: ")
-        control = input()
-        if control == "y":
+        if input("Change your name? y/n: ").lower() == "y":
             self.name = input("Type your name: ").capitalize()
-        print("Change your age? y/n: ")
-        control = input()
-        if control == "y":
+        if input("Change your age? y/n: ").lower() == "y":
             self.age = int(input("Type your age: "))
             while self.age == 0 or self.age > 99:
                     self.age = int(input("Type a valid age: "))
-        print("Change adress? y/n: ")
-        control = input()
-        if control == "y":
+        if input("Change adress? y/n: ").lower() == "y":
             self.address = input("Type your adress:")
-        print("Change email? y/n: ")
-        control = input()
-        if control == "y":
+        if input("Change email? y/n: ").lower() == "y":
             self.email = input("Type your email: ")
 
 class Pet(Base):
