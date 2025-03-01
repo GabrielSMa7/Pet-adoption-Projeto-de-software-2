@@ -15,8 +15,8 @@ class Base:
         return None
 
     @staticmethod
-    def showlist(list):
-        for i in list:
+    def showlist(lista):
+        for i in lista:
             print(f"{i.name}")
     
     @staticmethod
@@ -136,12 +136,11 @@ class Pet(Base):
                     print("What kind of type?")
                     tpe = []
                     for i in list:
-                        tpe.append.getattr(i, "type")
-                        tpe = set(tpe)
-
+                        tpe.append(getattr(i, "type"))
+                        
+                    tpe = set(tpe)
                     for j in tpe:
-                        print("--")
-                        print(f"{tpe[i]}\n")
+                        print(f"--{j}")
 
                     spc = input()
                     break
@@ -150,12 +149,10 @@ class Pet(Base):
                     print("What kind of Size?")
                     size = []
                     for i in list:
-                        size.append.getattr(i, "size")
-                        size = set(size)
-
+                        size.append(getattr(i, "size"))
+                    size = set(size)
                     for j in size:
-                        print("--")
-                        print(f"{size[i]}\n")
+                        print(f"--{j}")
                     spc = input()
                     break
                 if fltrs.lower() == "gender":
@@ -163,12 +160,11 @@ class Pet(Base):
                     print("What kind of gender?\n--Female\n--Male")
                     gender = []
                     for i in list:
-                        gender.append.getattr(i, "gender")
-                        gender = set(gender)
-
+                        gender.append(getattr(i, "gender"))
+                        
+                    gender = set(gender)
                     for j in gender:
-                        print("--")
-                        print(f"{gender[i]}\n")
+                        print(f"--{j}")
                     spc = input()
                     break
                 else:
@@ -178,10 +174,10 @@ class Pet(Base):
             spc = spc.strip().lower()
             fltrs = fltrs.strip().lower()
 
-            list = Pet.filtr(list, fltrs, spc)
+            list = Pet.filters(list, fltrs, spc)
             print("Apply another filter? y/n")
             choice = input()
-
+            return list
 class Event(Base):
     def __init__(self, name, local, date, open, close, type):
         self.name = name

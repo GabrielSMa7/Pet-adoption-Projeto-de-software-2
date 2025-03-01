@@ -41,16 +41,13 @@ def showpets():
     global pets
     filter_pets = pets
     os.system("cls")
-    
-    
-
     while True:
         
         os.system("cls")
 
-        clases.Pet.search(pets)
+        filter_pets = clases.Pet.search(filter_pets)
 
-        clases.Pet.showlist(pets)
+        clases.Pet.showlist(filter_pets)
 
         print("See more informations? y/n")
         info = input().lower()
