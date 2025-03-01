@@ -9,7 +9,7 @@ import os
 while True:
     os.system("cls")
 
-    if user_account.users == [""]:
+    if user_account.users != [""]:
         print(f"Welcome {user_account.user.name} to our Pet Adoption Platform!!!")
     else:
         print(f"Welcome quest to our Pet Adoption Platform!!!")
