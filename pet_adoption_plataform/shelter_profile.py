@@ -7,6 +7,7 @@ from pet_adoption_plataform import clases
 shelter1 = clases.Shelter(
         'Adocão',
         'Maceio',
+        'endereço',
         'adoteme@org.com',
         '4949939052',
         3,
@@ -15,6 +16,7 @@ shelter1 = clases.Shelter(
 shelter2 = clases.Shelter(
         'Amigo de pata',
         'Penedo',
+        'Endereço',
         'adocao@yahoo.com',
         '63348842',
         3,
