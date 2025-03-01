@@ -12,7 +12,7 @@ def user_profile():
         if users == ['']:
             print("You need creat a account!")
         else:
-            user.User.show_info()
+            user.show_info()
 
         escolha = input("--Creat account (1)\n--Change account (2)\n--Return (3)\n")
 
