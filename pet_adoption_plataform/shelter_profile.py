@@ -20,9 +20,27 @@ shelter2 = clases.Shelter(
         3,
         'O Abrigo Esperança Animal é um espaço dedicado ao resgate, cuidado e reabilitação de animais abandonados, maltratados ou em situação de risco. Nossa missão é oferecer um lar temporário seguro, repleto de amor e atenção, enquanto trabalhamos para encontrar famílias responsáveis e amorosas para cada um de nossos resgatados.'
     )
+shelter3 = clases.Shelter(
+        'Casa do hobbit',
+        'Gondor',
+        'sociedadedoanel@gmail.com',
+        '63463322',
+        2,
+        'Animais miticos de todas as formas e tamanhos.'
+    )
+shelter4 = clases.Shelter(
+        'Zoooo',
+        'New York',
+        'eumeremxomuito@gmail.com',
+        '6342145612',
+        1,
+        'Animais exoticos.'
+    )
 shelters = [
     shelter1,
-    shelter2
+    shelter2,
+    shelter3,
+    shelter4
 ]
 
 def showshelter():

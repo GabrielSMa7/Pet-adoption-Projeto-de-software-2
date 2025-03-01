@@ -2,7 +2,7 @@ from pet_adoption_plataform import user_account
 
 def adoption(pet, rescue):
 
-    if user_account.user.age == 0:
+    if user_account.users == ['']:
         print("You need have a account to adopt a pet")
         input("Press any key to return")
     elif user_account.user.age < 21:

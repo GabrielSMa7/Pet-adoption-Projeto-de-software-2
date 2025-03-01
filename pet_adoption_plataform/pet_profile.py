@@ -29,59 +29,28 @@ pet3 = Pet("Snoop", 2, "male", "black and white", "small", "dog", shelter_profil
 pet4 = Pet("Lady", 2, "female", "brown", "small", "dog", shelter_profile.shelter2)
 pet5 = Pet("Scooby", 10, "male", "brown", "big", "dog", shelter_profile.shelter2)
 pet6 = Pet("Marrie", 1, "female", "white", "small", "cat", shelter_profile.shelter2)
+pet7 = Pet("Clebinho", 7462, "male", "Red", "big", "dragon", shelter_profile.shelter3)
+pet8 = Pet("Jonas", 17, "male", "brown", "big", "pig", shelter_profile.shelter2)
+pet9 = Pet("Pong", 11, "male", "orange", "small", "orangotango", shelter_profile.shelter4)
+pet10 = Pet("Perrita", 8, "female", "pink", "small", "spider", shelter_profile.shelter4)
+pet11 = Pet("Marta", 674, "female", "brown", "big", "terrasque", shelter_profile.shelter3)
 
-pets = [pet1, pet2, pet3, pet4, pet5, pet6]        
+pets = [pet1, pet2, pet3, pet4, pet5, pet6, pet7, pet8, pet9, pet10, pet11]        
 
 def showpets():
     global pets
     filter_pets = pets
     os.system("cls")
     
-    print(f"{len(filter_pets)} pets available!")
-    print("Apply filters? y/n")
-    choice = input()
-
-    while choice == "y":
     
-        os.system("cls")
-
-        while True:  
-        
-            print("What kind of filter?\n--Type\n--Size\n--Gender")
-            fltrs = input()
-
-            if fltrs.lower() == "type":
-                os.system("cls")
-                print("What kind of type?\n--Cat\n--Dog")
-                spc = input()
-                break
-            if fltrs.lower() == "size":
-                os.system("cls")
-                print("What kind of Size?\n--Small\n--Medium\n--Big")
-                spc = input()
-                break
-            if fltrs.lower() == "gender":
-                os.system("cls")
-                print("What kind of gender?\n--Female\n--Male")
-                spc = input()
-                break
-            else:
-                os.system("cls")
-                print("Filter don't found, try again!")
-
-        spc = spc.strip().lower()
-        fltrs = fltrs.strip().lower()
-
-        filter_pets = search.filtr(filter_pets, fltrs, spc)
-        print("Apply another filter? y/n")
-        choice = input()
 
     while True:
         
         os.system("cls")
 
-        for pet in filter_pets:
-            print(f"Name: {pet.name}")
+        clases.Pet.search(pets)
+
+        clases.Pet.showlist(pets)
 
         print("See more informations? y/n")
         info = input().lower()

@@ -1,3 +1,5 @@
+import os
+
 class Base:
     def __init__(self, name):
         self.name = name
@@ -16,6 +18,21 @@ class Base:
     def showlist(list):
         for i in list:
             print(f"{i.name}")
+    
+    @staticmethod
+    def search():
+        pass
+
+    @staticmethod
+    def filters(list, fltrs, sps):
+        #cria um dicionario novo para armazenar os itens selecionados
+        newlist = [i for i in list if getattr(i, fltrs, "").lower() == sps.lower()]
+
+        #printa quantos itens tem no dicionario
+        print(f"{len(newlist)} pets available!")
+        
+        #retorna o novo dicionario
+        return newlist
 
 class Shelter(Base):
     def __init__(self, name, local, email, phone, pets, us):
@@ -35,29 +52,42 @@ class Shelter(Base):
         print(f"Us:{self.us}\n")
 
 class User(Base):
-    def __init__(self, name, age, address, email):
+    def __init__(self, name, password, age, address, email):
         self.name = name
+        self.password = password
         self.age = int(age)
         self.address = address
         self.email = email
+        self.logged = False
     
+    def login(self, name, password):
+        if (name != self.name) | (password != self.password):
+            self.logged == False
+            print("Wrong username or password")
+        else:
+            self.logged = True
+
     def show_info(self):
-        print(f"Name: {self.name}\nAge: {self.age}\nAdress: {self.address}\nEmail: {self.email}")
+        if self.logged == True:
+            print(f"Name: {self.name}\nAge: {self.age}\nAdress: {self.address}\nEmail: {self.email}")
     
     @classmethod
     def creat(cls):
         name = input("Type your name: ").capitalize()
+        password = input("Type your password: ")
         age = int(input("Type your age: "))
         while age == 0 or age > 99:
             age = int(input("Type a valid age: "))
         address = input("Type your adress: ")
         email = input("Type your email: ")
 
-        return cls(name, age, address, email)
+        return cls(name, password, age, address, email)
 
     def changers(self):
         if input("Change your name? y/n: ").lower() == "y":
             self.name = input("Type your name: ").capitalize()
+        if input("Change your password? y/n").lower() == "y":
+            self.password = input("Type your password")
         if input("Change your age? y/n: ").lower() == "y":
             self.age = int(input("Type your age: "))
             while self.age == 0 or self.age > 99:
@@ -85,3 +115,86 @@ class Pet(Base):
         print(f"type: {self.type}")
         print(f"Size: {self.size}")
         print(f"shelter: {self.shelter.name}\n")
+
+    @staticmethod
+    def search(list):
+        print(f"{len(list)} pets available!")
+        print("Apply filters? y/n")
+        choice = input()
+
+        while choice == "y":
+        
+            os.system("cls")
+
+            while True:  
+            
+                print("What kind of filter?\n--Type\n--Size\n--Gender")
+                fltrs = input()
+
+                if fltrs.lower() == "type":
+                    os.system("cls")
+                    print("What kind of type?")
+                    tpe = []
+                    for i in list:
+                        tpe.append.getattr(i, "type")
+                        tpe = set(tpe)
+
+                    for j in tpe:
+                        print("--")
+                        print(f"{tpe[i]}\n")
+
+                    spc = input()
+                    break
+                if fltrs.lower() == "size":
+                    os.system("cls")
+                    print("What kind of Size?")
+                    size = []
+                    for i in list:
+                        size.append.getattr(i, "size")
+                        size = set(size)
+
+                    for j in size:
+                        print("--")
+                        print(f"{size[i]}\n")
+                    spc = input()
+                    break
+                if fltrs.lower() == "gender":
+                    os.system("cls")
+                    print("What kind of gender?\n--Female\n--Male")
+                    gender = []
+                    for i in list:
+                        gender.append.getattr(i, "gender")
+                        gender = set(gender)
+
+                    for j in gender:
+                        print("--")
+                        print(f"{gender[i]}\n")
+                    spc = input()
+                    break
+                else:
+                    os.system("cls")
+                    print("Filter don't found, try again!")
+
+            spc = spc.strip().lower()
+            fltrs = fltrs.strip().lower()
+
+            list = Pet.filtr(list, fltrs, spc)
+            print("Apply another filter? y/n")
+            choice = input()
+
+class Event(Base):
+    def __init__(self, name, local, date, open, close, type):
+        self.name = name
+        self.local = local
+        self.date = date
+        self.open = open
+        self.close = close
+        self.type = type
+
+    def show_info(self):
+        print(f"Event name: {self.name}")
+        print(f"Local: {self.local}")
+        print(f"Date: {self.date}")
+        print(f"Open: {self.open}")
+        print(f"Close: {self.close}")
+        print(f"Type: {self.type}")

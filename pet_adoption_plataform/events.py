@@ -1,40 +1,21 @@
 import os
 from pet_adoption_plataform import search
+from pet_adoption_plataform import clases
 
-class Event:
-    def __init__(self, name, local, date, open, close, type):
-        self.name = name
-        self.local = local
-        self.date = date
-        self.open = open
-        self.close = close
-        self.type = type
 
-    def show_info(self):
-        print(f"Event name: {self.name}")
-        print(f"Local: {self.local}")
-        print(f"Date: {self.date}")
-        print(f"Open: {self.open}")
-        print(f"Close: {self.close}")
-        print(f"Type: {self.type}")
-
-event1 = Event('Feira de adoção', 'Parque da cidade', '12/02', '13:00', '17:00', 'adoption')
-event2 = Event('Feira de adoção 2', 'Parque da cidade', '13/02', '10:00', '20:00', 'adoption')
-event3 = Event('Feira de vacinação', 'Parque da cidade', '15/02', '7:00', '17:00', 'vaccination')
-event4 = Event('Feira de vacinação 2', 'Parque da cidade', '12/02', '8:00', '10:00', 'vaccination')
+event1 = clases.Event('Feira de adoção', 'Parque da cidade', '12/02', '13:00', '17:00', 'adoption')
+event2 = clases.Event('Feira de adoção 2', 'Parque da cidade', '13/02', '10:00', '20:00', 'adoption')
+event3 = clases.Event('Feira de vacinação', 'Parque da cidade', '15/02', '7:00', '17:00', 'vaccination')
+event4 = clases.Event('Feira de vacinação 2', 'Parque da cidade', '12/02', '8:00', '10:00', 'vaccination')
 
 events = [event1, event2, event3, event4]
-
-def searchevent(nome, lista):
-    for i in lista:
-        if i.name.lower() == nome.lower():
-            return i
-    return None
 
 def show_events():
     global events
     os.system("cls")
     
+    clases.Event.showlist(events)
+
     print(f"{len(events)} events available!")
     print("Apply filters? y/n")
     choice = input()
