@@ -7,7 +7,6 @@ from pet_adoption_plataform import clases
 shelter1 = clases.Shelter(
         'Adocão',
         'Maceio',
-        'endereço',
         'adoteme@org.com',
         '4949939052',
         3,
@@ -16,7 +15,6 @@ shelter1 = clases.Shelter(
 shelter2 = clases.Shelter(
         'Amigo de pata',
         'Penedo',
-        'Endereço',
         'adocao@yahoo.com',
         '63348842',
         3,
@@ -27,19 +25,12 @@ shelters = [
     shelter2
 ]
 
-def searchshelter(nome, lista):
-    for i in lista:
-        if i.name.lower() == nome.lower():
-            return i
-    return None
-
 def showshelter():
     while True:
         
         os.system("cls")
 
-        for i in shelters:
-            print(f"{i.name}")
+        clases.Shelter.showlist(shelters)
 
         print("See more about the shelters? y/n")
         choice = input()
@@ -48,7 +39,7 @@ def showshelter():
             print("Enter the name of the shelter you want to see: ")
             shelter_choiced = input()
 
-            shelter_info = searchshelter(shelter_choiced, shelters) 
+            shelter_info = clases.Shelter.search_name_in_list(shelter_choiced, shelters) 
 
             if shelter_info is None:
                 print("Shelter dont found")
