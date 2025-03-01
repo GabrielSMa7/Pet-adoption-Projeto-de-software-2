@@ -9,8 +9,10 @@ import os
 while True:
     os.system("cls")
 
-    print(f"Welcome {user_account.user.name} to our Pet Adoption Platform!!!")
-
+    if user_account.users == [""]:
+        print(f"Welcome {user_account.user.name} to our Pet Adoption Platform!!!")
+    else:
+        print(f"Welcome quest to our Pet Adoption Platform!!!")
     print("--View and adopt our pets type (1)\n--View your profile type (2)\n--See shelters and rescue information type (3)\n--Forum (4)\n--Exit (5)")
     choice = input()
     if choice == "1":
