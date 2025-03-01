@@ -2,28 +2,9 @@ import os
 from pet_adoption_plataform import pet_profile
 from pet_adoption_plataform import user_account
 from pet_adoption_plataform import search
-from pet_adoption_plataform import stories
+from pet_adoption_plataform import clases
 
-class Shelter:
-    def __init__(self, name, local, email, phone, pets, us):
-     self.name = name
-     self.local = local
-     self.email = email
-     self.phone = phone
-     self.pets = int(pets)
-     self.us = us   
-
-    def show_info(self):
-        print(f"Name:{self.name}")
-        print(f"Local:{self.local}")
-        print(f"Email:{self.email}")
-        print(f"Phone:{self.phone}")
-        print(f"Pets:{self.pets}")
-        print(f"Us:{self.us}\n")
-
-
-
-shelter1 = Shelter(
+shelter1 = clases.Shelter(
         'Adocão',
         'Maceio',
         'adoteme@org.com',
@@ -31,7 +12,7 @@ shelter1 = Shelter(
         3,
         'O Lar dos Peludos é um abrigo dedicado ao resgate e acolhimento de animais em situação de abandono e maus-tratos. Nosso objetivo é proporcionar um ambiente seguro e acolhedor para cães e gatos que precisam de uma segunda chance.'
     )
-shelter2 = Shelter(
+shelter2 = clases.Shelter(
         'Amigo de pata',
         'Penedo',
         'adocao@yahoo.com',
