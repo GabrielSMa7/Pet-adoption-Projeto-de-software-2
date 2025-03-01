@@ -17,7 +17,7 @@ def user_profile():
         escolha = input("--Creat account (1)\n--Change account (2)\n--Return (3)\n")
 
         if escolha == "1":
-            user = clases.User.creat()
+            user.creat()
             users.append(user)
         elif escolha == "2":
             if user.age != 0:
