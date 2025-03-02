@@ -50,8 +50,13 @@ def showcommunity():
                     continue
                 if comment == "2":
                     os.system("cls")
-                    if user_account.user.age == 00:
+                    if user_account.user == None:
                         print("You need to have a account")
+                        input()
+                        os.system("cls")
+                        continue
+                    elif user_account.user.logged == False:
+                        print("You need been logged")
                         input()
                         os.system("cls")
                         continue

@@ -1,51 +1,34 @@
-from pet_adoption_plataform import search
 from pet_adoption_plataform import adoption
 from pet_adoption_plataform import shelter_profile
 from pet_adoption_plataform import clases
 import os 
 
-class Pet:
-    def __init__(self, name, age, gender, color, size, type, shelter):
-        self.name = name
-        self.age = age
-        self.gender = gender
-        self.color = color
-        self.size = size        
-        self.type = type
-        self.shelter = shelter
+pet1 = clases.Pet("Bethoven",7, "male", "brown and white", "big", "dog", shelter_profile.shelter1)
+pet2 = clases.Pet("Garfiel", 4, "male", "orange", "medium", "cat", shelter_profile.shelter1)
+pet3 = clases.Pet("Snoop", 2, "male", "black and white", "small", "dog", shelter_profile.shelter1)
+pet4 = clases.Pet("Lady", 2, "female", "brown", "small", "dog", shelter_profile.shelter2)
+pet5 = clases.Pet("Scooby", 10, "male", "brown", "big", "dog", shelter_profile.shelter2)
+pet6 = clases.Pet("Marrie", 1, "female", "white", "small", "cat", shelter_profile.shelter2)
+pet7 = clases.Pet("Clebinho", 7462, "male", "Red", "big", "dragon", shelter_profile.shelter3)
+pet8 = clases.Pet("Jonas", 17, "male", "brown", "big", "pig", shelter_profile.shelter2)
+pet9 = clases.Pet("Pong", 11, "male", "orange", "small", "orangotango", shelter_profile.shelter4)
+pet10 = clases.Pet("Perrita", 8, "female", "pink", "small", "spider", shelter_profile.shelter4)
+pet11 = clases.Pet("Marta", 674, "female", "brown", "big", "terrasque", shelter_profile.shelter3)
+pet12 = clases.Pet("Jorel", 17, "male", "brown", "big", "anteater", shelter_profile.shelter4)
+pet13 = clases.Pet("Tati", 9, "female", "green", "big", "armadillo", shelter_profile.shelter4)
 
-    def show_info(self):
-        print(f"Name: {self.name}")
-        print(f"age: {self.age}")
-        print(f"Gender: {self.gender}")
-        print(f"color: {self.color}")
-        print(f"type: {self.type}")
-        print(f"Size: {self.size}")
-        print(f"shelter: {self.shelter.name}\n")
-
-pet1 = Pet("Bethoven",7, "male", "brown and white", "big", "dog", shelter_profile.shelter1)
-pet2 = Pet("Garfiel", 4, "male", "orange", "medium", "cat", shelter_profile.shelter1)
-pet3 = Pet("Snoop", 2, "male", "black and white", "small", "dog", shelter_profile.shelter1)
-pet4 = Pet("Lady", 2, "female", "brown", "small", "dog", shelter_profile.shelter2)
-pet5 = Pet("Scooby", 10, "male", "brown", "big", "dog", shelter_profile.shelter2)
-pet6 = Pet("Marrie", 1, "female", "white", "small", "cat", shelter_profile.shelter2)
-pet7 = Pet("Clebinho", 7462, "male", "Red", "big", "dragon", shelter_profile.shelter3)
-pet8 = Pet("Jonas", 17, "male", "brown", "big", "pig", shelter_profile.shelter2)
-pet9 = Pet("Pong", 11, "male", "orange", "small", "orangotango", shelter_profile.shelter4)
-pet10 = Pet("Perrita", 8, "female", "pink", "small", "spider", shelter_profile.shelter4)
-pet11 = Pet("Marta", 674, "female", "brown", "big", "terrasque", shelter_profile.shelter3)
-
-pets = [pet1, pet2, pet3, pet4, pet5, pet6, pet7, pet8, pet9, pet10, pet11]        
+pets = [pet1, pet2, pet3, pet4, pet5, pet6, pet7, pet8, pet9, pet10, pet11, pet12, pet13]        
 
 def showpets():
     global pets
-    filter_pets = pets
     os.system("cls")
     while True:
         
         os.system("cls")
 
-        filter_pets = clases.Pet.search(filter_pets)
+        filter_pets = clases.Pet.search(pets)
+
+        os.system("cls")
 
         clases.Pet.showlist(filter_pets)
 

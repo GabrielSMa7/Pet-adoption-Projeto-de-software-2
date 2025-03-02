@@ -1,5 +1,4 @@
 import os
-from pet_adoption_plataform import search
 from pet_adoption_plataform import clases
 
 
@@ -13,34 +12,10 @@ events = [event1, event2, event3, event4]
 def show_events():
     global events
     os.system("cls")
-    
-    clases.Event.showlist(events)
 
-    print(f"{len(events)} events available!")
-    print("Apply filters? y/n")
-    choice = input()
+    filter_events = clases.Event(events)
 
-    while choice == "y":
-    
-        os.system("cls")
-
-        while True:  
-        
-            print("What kind of filter?\n--Type")
-            fltrs = input().lower().strip()
-
-            if fltrs.lower() == "type":
-                os.system("cls")
-                print("What kind of type?\n--Adoption\n--Vaccination")
-                spc = input().lower().strip()
-                break
-            else:
-                os.system("cls")
-                print("Filter don't found, try again!")
-
-        events = search.filtr(events, fltrs, spc)
-        print("Apply another filter? y/n")
-        choice = input()
+    clases.Event.showlist(filter_events)
 
     while True:
         
@@ -55,7 +30,7 @@ def show_events():
         if info == "y":
             print("Enter the name of the pet you want to see: ")
             event_choiced = input().lower().capitalize()
-            event_info = searchevent(event_choiced, events)
+            event_info = clases.Event.search_name_in_list(event_choiced, events)
             
             if not event_info:
                 continue

@@ -3,9 +3,6 @@ import os
 class Base:
     def __init__(self, name):
         self.name = name
-
-    def show_info(self):
-        print(f"Name:{self.name}")
     
     @staticmethod
     def search_name_in_list(nome, lista):
@@ -26,14 +23,17 @@ class Base:
     @staticmethod
     def filters(list, fltrs, sps):
         #cria um dicionario novo para armazenar os itens selecionados
-        newlist = [i for i in list if getattr(i, fltrs, "").lower() == sps.lower()]
+        newlist = []
+
+        for i in list:
+            if str(getattr(i, fltrs)).lower() == sps.lower():
+                newlist.append(i)
 
         #printa quantos itens tem no dicionario
         print(f"{len(newlist)} pets available!")
         
         #retorna o novo dicionario
         return newlist
-
 class Shelter(Base):
     def __init__(self, name, local, email, phone, pets, us):
      super().__init__(name)
@@ -50,10 +50,9 @@ class Shelter(Base):
         print(f"Phone:{self.phone}")
         print(f"Pets:{self.pets}")
         print(f"Us:{self.us}\n")
-
 class User(Base):
     def __init__(self, name, password, age, address, email):
-        self.name = name
+        super().__init__(name)
         self.password = password
         self.age = int(age)
         self.address = address
@@ -69,7 +68,10 @@ class User(Base):
 
     def show_info(self):
         if self.logged == True:
-            print(f"Name: {self.name}\nAge: {self.age}\nAdress: {self.address}\nEmail: {self.email}")
+            print(f"Name:{self.name}")
+            print(f"Age: {self.age}")
+            print(f"Email: {self.email}")
+            print(f"Address: {self.address}")
     
     @classmethod
     def creat(cls):
@@ -96,16 +98,16 @@ class User(Base):
             self.address = input("Type your adress:")
         if input("Change email? y/n: ").lower() == "y":
             self.email = input("Type your email: ")
-
 class Pet(Base):
     def __init__(self, name, age, gender, color, size, type, shelter):
-        self.name = name
+        super().__init__(name)
         self.age = age
         self.gender = gender
         self.color = color
         self.size = size        
         self.type = type
-        self.shelter = shelter
+        self.shelter = shelter.name
+        shelter.pets += 1
 
     def show_info(self):
         print(f"Name: {self.name}")
@@ -114,7 +116,7 @@ class Pet(Base):
         print(f"color: {self.color}")
         print(f"type: {self.type}")
         print(f"Size: {self.size}")
-        print(f"shelter: {self.shelter.name}\n")
+        print(f"shelter: {self.shelter}\n")
 
     @staticmethod
     def search(list):
@@ -128,44 +130,70 @@ class Pet(Base):
 
             while True:  
             
-                print("What kind of filter?\n--Type\n--Size\n--Gender")
+                print("What kind of filter?\n--Type\n--Color\n--Size\n--Gender")
                 fltrs = input()
+
+                if fltrs.lower() == "color":
+                    os.system("cls")
+                    print("What kind of color?")
+                    color = []
+                    for i in list:
+                        color.append(getattr(i, "color").capitalize())
+                        
+                    color = set(color)
+                    for j in color:
+                        print(f"--{j}")
+
+                    
+                    spc = input().capitalize()
+                    while spc not in color:
+                        spc = input("Filter don't found, try again!")
+                    break
 
                 if fltrs.lower() == "type":
                     os.system("cls")
                     print("What kind of type?")
                     tpe = []
                     for i in list:
-                        tpe.append(getattr(i, "type"))
+                        tpe.append(getattr(i, "type").capitalize())
                         
                     tpe = set(tpe)
                     for j in tpe:
                         print(f"--{j}")
 
-                    spc = input()
+                    
+                    spc = input().capitalize()
+                    while spc not in tpe:
+                        spc = input("Filter don't found, try again!")
                     break
                 if fltrs.lower() == "size":
                     os.system("cls")
                     print("What kind of Size?")
                     size = []
                     for i in list:
-                        size.append(getattr(i, "size"))
+                        size.append(getattr(i, "size").capitalize())
                     size = set(size)
                     for j in size:
                         print(f"--{j}")
-                    spc = input()
+                    
+                    spc = input().capitalize()
+                    while spc not in size:
+                        spc = input("Filter don't found, try again!")
                     break
                 if fltrs.lower() == "gender":
                     os.system("cls")
                     print("What kind of gender?\n--Female\n--Male")
                     gender = []
                     for i in list:
-                        gender.append(getattr(i, "gender"))
+                        gender.append(getattr(i, "gender").capitalize())
                         
                     gender = set(gender)
                     for j in gender:
                         print(f"--{j}")
-                    spc = input()
+                    
+                    spc = input().capitalize()
+                    while spc not in gender:
+                        spc = input("Filter don't found, try again!")
                     break
                 else:
                     os.system("cls")
@@ -177,10 +205,10 @@ class Pet(Base):
             list = Pet.filters(list, fltrs, spc)
             print("Apply another filter? y/n")
             choice = input()
-            return list
+        return list
 class Event(Base):
     def __init__(self, name, local, date, open, close, type):
-        self.name = name
+        super().__init__(name)
         self.local = local
         self.date = date
         self.open = open
@@ -188,9 +216,38 @@ class Event(Base):
         self.type = type
 
     def show_info(self):
-        print(f"Event name: {self.name}")
+        print(f"Name: {self.name}")
         print(f"Local: {self.local}")
         print(f"Date: {self.date}")
         print(f"Open: {self.open}")
         print(f"Close: {self.close}")
         print(f"Type: {self.type}")
+
+    @staticmethod
+    def search(list):
+        print(f"{len(list)} events available!")
+        print("Apply filters? y/n")
+        choice = input()
+
+        while choice == "y":
+        
+            os.system("cls")
+
+            while True:  
+            
+                print("What kind of filter?\n--Type")
+                fltrs = input().lower().strip()
+
+                if fltrs.lower() == "type":
+                    os.system("cls")
+                    print("What kind of type?\n--Adoption\n--Vaccination")
+                    spc = input().lower().strip()
+                    break
+                else:
+                    os.system("cls")
+                    print("Filter don't found, try again!")
+
+            list = Base.filtre(list, fltrs, spc)
+            print("Apply another filter? y/n")
+            choice = input()
+        return list

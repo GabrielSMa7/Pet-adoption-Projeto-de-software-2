@@ -2,8 +2,8 @@ from pet_adoption_plataform import user_account
 
 def adoption(pet, rescue):
 
-    if user_account.users == ['']:
-        print("You need have a account to adopt a pet")
+    if user_account.user == None:
+        print("You need been logged to adopt a pet")
         input("Press any key to return")
     elif user_account.user.age < 21:
         print("You need be a adult to adopt a pet")
@@ -17,7 +17,7 @@ def adoption(pet, rescue):
         control = input()
         
         if control == "n":
-            user_account.changers()
+            user_account.user.changers()
 
         else:
             print(f"Hi {user_account.user.name}. Tell us a little about yourself, your home and your family's routine")

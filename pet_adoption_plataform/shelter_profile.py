@@ -1,7 +1,6 @@
 import os
 from pet_adoption_plataform import pet_profile
 from pet_adoption_plataform import user_account
-from pet_adoption_plataform import search
 from pet_adoption_plataform import clases
 
 shelter1 = clases.Shelter(
@@ -9,7 +8,7 @@ shelter1 = clases.Shelter(
         'Maceio',
         'adoteme@org.com',
         '4949939052',
-        3,
+        0,
         'O Lar dos Peludos é um abrigo dedicado ao resgate e acolhimento de animais em situação de abandono e maus-tratos. Nosso objetivo é proporcionar um ambiente seguro e acolhedor para cães e gatos que precisam de uma segunda chance.'
     )
 shelter2 = clases.Shelter(
@@ -17,7 +16,7 @@ shelter2 = clases.Shelter(
         'Penedo',
         'adocao@yahoo.com',
         '63348842',
-        3,
+        0,
         'O Abrigo Esperança Animal é um espaço dedicado ao resgate, cuidado e reabilitação de animais abandonados, maltratados ou em situação de risco. Nossa missão é oferecer um lar temporário seguro, repleto de amor e atenção, enquanto trabalhamos para encontrar famílias responsáveis e amorosas para cada um de nossos resgatados.'
     )
 shelter3 = clases.Shelter(
@@ -25,7 +24,7 @@ shelter3 = clases.Shelter(
         'Gondor',
         'sociedadedoanel@gmail.com',
         '63463322',
-        2,
+        0,
         'Animais miticos de todas as formas e tamanhos.'
     )
 shelter4 = clases.Shelter(
@@ -33,7 +32,7 @@ shelter4 = clases.Shelter(
         'New York',
         'eumeremxomuito@gmail.com',
         '6342145612',
-        1,
+        0,
         'Animais exoticos.'
     )
 shelters = [
@@ -90,10 +89,9 @@ def showshelter():
                 continue
 
             elif choice == "1":
-                pets_availables = search.filtr(pet_profile.pets, "shelter", shelter_info.name)
+                pets_availables = clases.Shelter.filters(pet_profile.pets, "shelter", shelter_info.name)
 
-                for pet in pets_availables.keys():
-                    print(f"Name: {pet}")
+                clases.Base.showlist(pets_availables)
 
                 input("\nPress any key to return")
                 continue

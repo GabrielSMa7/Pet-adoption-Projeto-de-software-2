@@ -8,13 +8,18 @@ from pet_adoption_plataform import education
 def menu():
     while True:
         os.system("cls")
-        print(f"Welcome {user_account.user_name} to our forum")
+        if user_account.user != None:
+            if user_account.user.logged == True:
+                print(f"Welcome {user_account.user.name} to our forum")
+            else:
+                print(f"Welcome quest to our forum")
+        else:
+            print(f"Welcome quest to our forum")
         print("--Events (1)\n--Community (2)\n--Help and tips(3)\n--Successful stories(4)\n--Return (5)")
         choice = input()
         if choice == "1":
             os.system("cls")
             events.show_events()
-
         if choice == "2":
             os.system("cls")
             community.showcommunity()
