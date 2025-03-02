@@ -15,7 +15,7 @@ pet9 = clases.Pet("Pong", 11, "male", "orange", "small", "orangotango", shelter_
 pet10 = clases.Pet("Perrita", 8, "female", "pink", "small", "spider", shelter_profile.shelter4)
 pet11 = clases.Pet("Marta", 674, "female", "brown", "big", "terrasque", shelter_profile.shelter3)
 pet12 = clases.Pet("Jorel", 17, "male", "brown", "big", "anteater", shelter_profile.shelter4)
-pet13 = clases.Pet("Tati", 9, "female", "green", "big", "armadillo", shelter_profile.shelter4)
+pet13 = clases.Pet("Fernada", 9, "female", "green", "big", "armadillo", shelter_profile.shelter4)
 
 pets = [pet1, pet2, pet3, pet4, pet5, pet6, pet7, pet8, pet9, pet10, pet11, pet12, pet13]        
 
