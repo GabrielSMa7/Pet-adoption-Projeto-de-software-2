@@ -99,7 +99,7 @@ class User(Base):
         if input("Change email? y/n: ").lower() == "y":
             self.email = input("Type your email: ")
 class Pet(Base):
-    def __init__(self, name, age, gender, color, size, type, shelter):
+    def __init__(self, name, age, gender, color, size, type, shelter, adopted: bool):
         super().__init__(name)
         self.age = age
         self.gender = gender
@@ -108,6 +108,7 @@ class Pet(Base):
         self.type = type
         self.shelter = shelter
         shelter.pets += 1
+        self.adopted = adopted
 
     def show_info(self):
         print(f"Name: {self.name}")
@@ -206,6 +207,9 @@ class Pet(Base):
             print("Apply another filter? y/n")
             choice = input()
         return list
+    
+    def stories(self, storie):
+        self.storie = storie
 class Event(Base):
     def __init__(self, name, local, date, open, close, type):
         super().__init__(name)
@@ -265,7 +269,6 @@ class Message:
 
     def add(self, comment):
         self.messages.append(comment)
-
 class Topic(Base, Message):
     def __init__(self, name, owner, title, message):
         self.name = name
