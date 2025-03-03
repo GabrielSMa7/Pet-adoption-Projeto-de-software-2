@@ -13,7 +13,7 @@ def show_events():
     global events
     os.system("cls")
 
-    filter_events = clases.Event(events)
+    filter_events = clases.Event.search(events)
 
     clases.Event.showlist(filter_events)
 

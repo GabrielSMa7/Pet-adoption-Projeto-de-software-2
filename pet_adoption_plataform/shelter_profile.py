@@ -4,7 +4,7 @@ from pet_adoption_plataform import user_account
 from pet_adoption_plataform import clases
 
 shelter1 = clases.Shelter(
-        'Adocão',
+        'Lar dos Peludos',
         'Maceio',
         'adoteme@org.com',
         '4949939052',
@@ -12,7 +12,7 @@ shelter1 = clases.Shelter(
         'O Lar dos Peludos é um abrigo dedicado ao resgate e acolhimento de animais em situação de abandono e maus-tratos. Nosso objetivo é proporcionar um ambiente seguro e acolhedor para cães e gatos que precisam de uma segunda chance.'
     )
 shelter2 = clases.Shelter(
-        'Amigo de pata',
+        'Esperança Animal',
         'Penedo',
         'adocao@yahoo.com',
         '63348842',

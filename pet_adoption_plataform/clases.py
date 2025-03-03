@@ -36,7 +36,7 @@ class Base:
         return newlist
 class Shelter(Base):
     def __init__(self, name, local, email, phone, pets, us):
-     super().__init__(name)
+     self.name = name
      self.local = local
      self.email = email
      self.phone = phone
@@ -106,7 +106,7 @@ class Pet(Base):
         self.color = color
         self.size = size        
         self.type = type
-        self.shelter = shelter.name
+        self.shelter = shelter
         shelter.pets += 1
 
     def show_info(self):
@@ -116,7 +116,7 @@ class Pet(Base):
         print(f"color: {self.color}")
         print(f"type: {self.type}")
         print(f"Size: {self.size}")
-        print(f"shelter: {self.shelter}\n")
+        print(f"shelter: {self.shelter.name}\n")
 
     @staticmethod
     def search(list):
@@ -247,7 +247,53 @@ class Event(Base):
                     os.system("cls")
                     print("Filter don't found, try again!")
 
-            list = Base.filtre(list, fltrs, spc)
+            list = Base.filters(list, fltrs, spc)
             print("Apply another filter? y/n")
             choice = input()
         return list
+class Message:
+    def __init__(self, owner, message):
+        self.owner = owner
+        self.messages = []
+        self.messages.append(message)
+
+    
+    def show_comment(self):
+        for i in self.messages:
+            print(f"Owner: {self.owner}")
+            print(f"Mensage: {i}")
+
+    def add(self, comment):
+        self.messages.append(comment)
+
+class Topic(Base, Message):
+    def __init__(self, name, owner, title, message):
+        self.name = name
+        self.owner = owner
+        self.title = title
+        self.message = message
+        self.comments = {}
+
+    def create(owner):
+        name = input("Topic name:")
+        title = input("Post's title:")
+        message = input("Decrible your post:")
+        name = Topic(name, owner, title, message)
+        return name
+
+    def coment(self, owner, coment):
+        if owner not in self.comments:
+            self.comments[owner] = Message(owner, coment)
+        else:
+            self.comments[owner].add(coment)
+            
+
+    def show_info(self):
+        print(f"User: {self.owner}")
+        print(f"Title: {self.title}")
+        print(f"Message: {self.message}")
+        print(f"Coments: {len(self.comments)}")
+
+    def show_comments(self):
+        for user in self.comments:
+            self.comments[user].show_comment()
