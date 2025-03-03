@@ -77,7 +77,7 @@ def showshelter():
             os.system("cls")
 
             if choice == "2":
-                if user_account.user.age == "Unknown":
+                if user_account.user == None:
                     print("You need have a account to do a donation")   
                 elif user_account.user.age > 18:
                     print("Send your tip")

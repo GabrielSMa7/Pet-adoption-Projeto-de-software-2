@@ -10,7 +10,7 @@ pet3 = clases.Pet("Luna", 1, "cat", "white", "small", "cat", shelter_profile.she
 stories = [pet, pet3, pet2]
 
 pet.stories("A Cristal foi adotada após o primeiro dia de anúncio. Estamos muito felizes em fazer parte dessa história 🤍")
-pet.stories("A quinta casa depois do abrigo um guerreirinho")
+pet2.stories("A quinta casa depois do abrigo um guerreirinho")
 pet3.stories("Um rapaz de bom coração levou ela")
 
 def showstorie():

@@ -22,5 +22,6 @@ def adoption(pet, rescue):
         else:
             print(f"Hi {user_account.user.name}. Tell us a little about yourself, your home and your family's routine")
             input()
-            print(f"Thank you for your request to adopt {pet}, us from {rescue.name} will analisy your request and send a email for {user_account.user.email} to aprove\nContact us\nPhone:{rescue.phone}\nEmail:{rescue.email}")
+            print(f"Thank you for your request to adopt {pet.name}, us from {rescue.name} will analisy your request and send a email for {user_account.user.email} to aprove\nContact us\nPhone:{rescue.phone}\nEmail:{rescue.email}")
+            pet.adopted = True
             input("\nPress any key to return")

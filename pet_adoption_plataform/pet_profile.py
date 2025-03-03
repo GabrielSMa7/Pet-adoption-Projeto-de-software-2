@@ -26,7 +26,9 @@ def showpets():
         
         os.system("cls")
 
-        filter_pets = clases.Pet.search(pets)
+        filter_pets = clases.Pet.filters(pets, "adopted", "False")
+
+        filter_pets = clases.Pet.search(filter_pets)
 
         os.system("cls")
 
@@ -56,9 +58,11 @@ def showpets():
                 continue
 
             elif choice == "1":
-                adoption.adoption(paw_info.name, paw_info.shelter)
+                adoption.adoption(paw_info, paw_info.shelter)
                 break
             elif choice == "3":
                 break
+        elif info != "n":
+            continue
         else:
             break

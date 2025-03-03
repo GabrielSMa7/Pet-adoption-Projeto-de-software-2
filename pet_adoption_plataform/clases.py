@@ -121,12 +121,12 @@ class Pet(Base):
 
     @staticmethod
     def search(list):
-        print(f"{len(list)} pets available!")
         print("Apply filters? y/n")
-        choice = input()
-
+        choice = input().lower()
+        while choice != "n" and choice != "y":
+            print("Wrong comand try again:")
+            choice = input().lower()
         while choice == "y":
-        
             os.system("cls")
 
             while True:  
@@ -183,7 +183,7 @@ class Pet(Base):
                     break
                 if fltrs.lower() == "gender":
                     os.system("cls")
-                    print("What kind of gender?\n--Female\n--Male")
+                    print("What kind of gender?")
                     gender = []
                     for i in list:
                         gender.append(getattr(i, "gender").capitalize())
@@ -200,12 +200,22 @@ class Pet(Base):
                     os.system("cls")
                     print("Filter don't found, try again!")
 
-            spc = spc.strip().lower()
-            fltrs = fltrs.strip().lower()
+                spc = spc.strip().lower()
+                fltrs = fltrs.strip().lower()
 
             list = Pet.filters(list, fltrs, spc)
-            print("Apply another filter? y/n")
-            choice = input()
+            if len(list) > 1:
+                print("Apply another filter? y/n")
+                choice = input().lower()
+                while choice != "n" and choice != "y":
+                    print("Wrong comand try again:")
+                    choice = input().lower()
+            elif len(list) == 0:
+                print("No results")
+                break
+            elif len(list) == 1:
+                choice == "n"
+                break
         return list
     
     def stories(self, storie):
@@ -252,8 +262,15 @@ class Event(Base):
                     print("Filter don't found, try again!")
 
             list = Base.filters(list, fltrs, spc)
-            print("Apply another filter? y/n")
-            choice = input()
+            list = Pet.filters(list, fltrs, spc)
+            if len(list) > 1:
+                print("Apply another filter? y/n")
+                choice = input().lower()
+                while choice != "n" and choice != "y":
+                    print("Wrong comand try again:")
+                    choice = input().lower()
+            elif len(list) == 0:
+                print("No results")
         return list
 class Message:
     def __init__(self, owner, message):
