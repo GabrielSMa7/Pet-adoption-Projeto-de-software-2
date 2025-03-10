@@ -1,30 +1,67 @@
 import os
 from pet_adoption_plataform import clases
+from pet_adoption_plataform import shelter_profile
 
-user = None
+
+shelter_user1 = clases.Shelter_user(
+        'Lar dos Peludos',
+        '1',
+        'adoteme@org.com',
+        '4949939052',
+        shelter_profile.shelter1
+    )
+shelter_user2 = clases.Shelter_user(
+        'Esperança Animal',
+        '2',
+        'adocao@yahoo.com',
+        '63348842',
+        shelter_profile.shelter2
+    )
+shelter_user3 = clases.Shelter_user(
+        'Casa do hobbit',
+        '3',
+        'sociedadedoanel@gmail.com',
+        '63463322',
+        shelter_profile.shelter3
+    )
+shelter_user4 = clases.Shelter_user(
+        'Zoooo',
+        '4',
+        'eumeremxomuito@gmail.com',
+        '6342145612',
+        shelter_profile.shelter4
+    )
+users = [shelter_user1, shelter_user2, shelter_user3, shelter_user4]
+current_user = None
 
 def user_profile():
     while True:
-        global user
+        global current_user
 
         os.system("cls")
 
-        if user == None:
+        if users == []:
             print("You need creat a account!")
         else:
-            user.show_info()
+            if current_user != None:
+                current_user.show_info()
 
-        escolha = input("--Creat account (1)\n--Login (2)\n--Change account (3)\n--Return (4)\n")
+        escolha = input("--Creat account (1)\n--Login (2)\n--Change account information (3)\n--Return (4)\n")
 
         if escolha == "1":
-            user = clases.User.creat()
+            new_user = clases.User.creat()
+            users.append(new_user)
         if escolha == "2":
             username = input("Your username:").capitalize()
             password = input("Your password: ")
-            user.login(username, password)
+            current_user = clases.User.search_name_in_list(username, users)
+            if current_user:
+                current_user.login(username, password)
+            else:
+                print("User not exist")
         elif escolha == "3":
-            if user.age != 0:
-                user.changers()
+            if current_user.getlogin():
+                current_user.changers()
             else:
                 while True:
                     print("You need creat a account!")

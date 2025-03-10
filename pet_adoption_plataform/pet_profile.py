@@ -1,5 +1,6 @@
 from pet_adoption_plataform import adoption
 from pet_adoption_plataform import shelter_profile
+from pet_adoption_plataform import user_account
 from pet_adoption_plataform import clases
 import os
 
@@ -22,47 +23,69 @@ pets = [pet1, pet2, pet3, pet4, pet5, pet6, pet7, pet8, pet9, pet10, pet11, pet1
 def showpets():
     global pets
     os.system("cls")
-    while True:
-        
-        os.system("cls")
+    if user_account.current_user.admin == True:
+        while True:
+            print("--Add pet(1)\n--Remove pet(2)\n--Return (3)")
+            choice = input()
 
-        filter_pets = clases.Pet.filters(pets, "adopted", "False")
+            if choice == '1':
+                new_pet = clases.Pet.create(user_account.current_user.shelter)
+                pets.append(new_pet)
+            if choice == '2':
+                filter_pets = clases.Pet.filters(pets, "shelter", user_account.current_user.shelter.name)
+                clases.Pet.showlist(filter_pets)
+                print("Choice one to remove")
+                pet_choiced = input()
+                if clases.Pet.search_name_in_list(pet_choiced, filter_pets) :
+                    pets.remove(pet_choiced)
+                else:
+                    print("Pet not found")
+                    input()
+            if choice == '3':
+                break
 
-        filter_pets = clases.Pet.search(filter_pets)
-
-        os.system("cls")
-
-        clases.Pet.showlist(filter_pets)
-
-        print("See more informations? y/n")
-        info = input().lower()
-
-        if info == "y":
-            print("Enter the name of the pet you want to see: ")
-            pet_choiced = input().lower().capitalize()
-            paw_info = clases.Pet.search_name_in_list(pet_choiced, pets)
-            
-            if paw_info == None:
-                input("Pet dont found")
-                continue
+    else:
+        while True:
             
             os.system("cls")
 
-            paw_info.show_info()
+            filter_pets = clases.Pet.filters(pets, "adopted", "False")
 
-            print("--Want to adopt this pet? (1)\n--Return (2)\n--Exit (3)")
-            
-            choice = input()
-            
-            if choice == "2":
+            filter_pets = clases.Pet.search(filter_pets)
+
+            os.system("cls")
+
+            clases.Pet.showlist(filter_pets)
+
+            print("See more informations? y/n")
+            info = input().lower()
+
+            if info == "y":
+                print("Enter the name of the pet you want to see: ")
+                pet_choiced = input().lower().capitalize()
+                paw_info = clases.Pet.search_name_in_list(pet_choiced, pets)
+                
+                if paw_info == None:
+                    input("Pet dont found")
+                    continue
+                
+                os.system("cls")
+
+                paw_info.show_info()
+
+                print("--Want to adopt this pet? (1)\n--Return (2)\n--Exit (3)")
+                
+                choice = input()
+                
+                if choice == "2":
+                    continue
+
+                elif choice == "1":
+                    adoption.adoption(paw_info, paw_info.shelter)
+                    break
+                elif choice == "3":
+                    break
+            elif info != "n":
                 continue
-
-            elif choice == "1":
-                adoption.adoption(paw_info, paw_info.shelter)
+            else:
                 break
-            elif choice == "3":
-                break
-        elif info != "n":
-            continue
-        else:
-            break

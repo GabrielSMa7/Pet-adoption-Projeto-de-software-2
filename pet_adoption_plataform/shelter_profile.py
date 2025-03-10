@@ -35,12 +35,12 @@ shelter4 = clases.Shelter(
         0,
         'Animais exoticos.'
     )
-shelters = [
+shelters = {
     shelter1,
     shelter2,
     shelter3,
     shelter4
-]
+}
 
 def showshelter():
     while True:

@@ -29,7 +29,6 @@ class Base:
             if str(getattr(i, fltrs)).lower() == sps.lower():
                 newlist.append(i)
 
-        #printa quantos itens tem no dicionario
         print(f"{len(newlist)} pets available!")
         
         #retorna o novo dicionario
@@ -53,21 +52,37 @@ class Shelter(Base):
 class User(Base):
     def __init__(self, name, password, age, address, email):
         super().__init__(name)
-        self.password = password
+        self.__password = password
         self.age = int(age)
         self.address = address
         self.email = email
-        self.logged = False
+        self.__logged = False
+        self.admin = False
     
+    def getpassword(self):
+        return self.__password
+    
+    def changepassword(self, new):
+        self.__password = new
+
+    def getlogin(self):
+        return self.__logged
+
     def login(self, name, password):
-        if (name != self.name) | (password != self.password):
-            self.logged == False
+        if (name != self.name) | (password != self.getpassword()):
+            self.__logged == False
             print("Wrong username or password")
         else:
-            self.logged = True
+            self.__logged = True
+
+    def search_name_in_list(name, list):
+        for i in list:
+            if i.name == name:
+                return i
+        return None
 
     def show_info(self):
-        if self.logged == True:
+        if self.__logged == True:
             print(f"Name:{self.name}")
             print(f"Age: {self.age}")
             print(f"Email: {self.email}")
@@ -89,7 +104,8 @@ class User(Base):
         if input("Change your name? y/n: ").lower() == "y":
             self.name = input("Type your name: ").capitalize()
         if input("Change your password? y/n").lower() == "y":
-            self.password = input("Type your password")
+            new_password = input("Type your password")
+            self.changepassword(new_password)
         if input("Change your age? y/n: ").lower() == "y":
             self.age = int(input("Type your age: "))
             while self.age == 0 or self.age > 99:
@@ -98,6 +114,22 @@ class User(Base):
             self.address = input("Type your adress:")
         if input("Change email? y/n: ").lower() == "y":
             self.email = input("Type your email: ")
+
+class Shelter_user(User):
+    def __init__(self, name, password, address, email, shelter):
+        super().__init__(name, password, age = 0, address=address, email=email)
+        del self.age
+        self.admin = True
+        self.shelter = shelter
+
+    def show_info(self):
+        if self.getlogin() == True:
+            print(f"Name:{self.name}")
+            print(f"Email: {self.email}")
+            print(f"Address: {self.address}")
+
+    
+
 class Pet(Base):
     def __init__(self, name, age, gender, color, size, type, shelter, adopted: bool):
         super().__init__(name)
@@ -118,6 +150,17 @@ class Pet(Base):
         print(f"type: {self.type}")
         print(f"Size: {self.size}")
         print(f"shelter: {self.shelter.name}\n")
+        
+    @staticmethod
+    def create(shelter):
+        name = input("Name:")
+        age = input(f"age:")
+        gender = input(f"Gender:")
+        color = input(f"color:")
+        type = input(f"type:")
+        size = input(f"Size:")
+        return Pet(name, age, gender, color, size, type, shelter, adopted=False)
+
 
     @staticmethod
     def search(list):
@@ -147,8 +190,8 @@ class Pet(Base):
 
                     
                     spc = input().capitalize()
-                    while spc not in color:
-                        spc = input("Filter don't found, try again!")
+                    if spc not in color:
+                        spc = input("Filter not found, try again!")
                     break
 
                 if fltrs.lower() == "type":
@@ -164,8 +207,8 @@ class Pet(Base):
 
                     
                     spc = input().capitalize()
-                    while spc not in tpe:
-                        spc = input("Filter don't found, try again!")
+                    if spc not in tpe:
+                        spc = input("Filter not found, try again!")
                     break
                 if fltrs.lower() == "size":
                     os.system("cls")
@@ -179,7 +222,7 @@ class Pet(Base):
                     
                     spc = input().capitalize()
                     while spc not in size:
-                        spc = input("Filter don't found, try again!")
+                        spc = input("Filter not found, try again!")
                     break
                 if fltrs.lower() == "gender":
                     os.system("cls")
@@ -193,12 +236,12 @@ class Pet(Base):
                         print(f"--{j}")
                     
                     spc = input().capitalize()
-                    while spc not in gender:
-                        spc = input("Filter don't found, try again!")
+                    if spc not in gender:
+                        spc = input("Filter not found, try again!")
                     break
                 else:
                     os.system("cls")
-                    print("Filter don't found, try again!")
+                    print("Filter not found, try again!")
 
                 spc = spc.strip().lower()
                 fltrs = fltrs.strip().lower()
@@ -259,7 +302,7 @@ class Event(Base):
                     break
                 else:
                     os.system("cls")
-                    print("Filter don't found, try again!")
+                    print("Filter not found, try again!")
 
             list = Base.filters(list, fltrs, spc)
             list = Pet.filters(list, fltrs, spc)

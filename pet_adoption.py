@@ -7,9 +7,9 @@ import os
 while True:
     os.system("cls")
 
-    if user_account.user != None:
-        if user_account.user.logged == True:
-            print(f"Welcome {user_account.user.name} to our Pet Adoption Platform!!!")
+    if user_account.current_user != None:
+        if user_account.current_user.getlogin() == True:
+            print(f"Welcome {user_account.current_user.name} to our Pet Adoption Platform!!!")
         else:
             print(f"Welcome quest to our Pet Adoption Platform!!!")
     else:

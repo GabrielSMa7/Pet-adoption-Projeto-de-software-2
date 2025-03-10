@@ -9,7 +9,7 @@ def menu():
     while True:
         os.system("cls")
         if user_account.user != None:
-            if user_account.user.logged == True:
+            if user_account.user.getlogin() == True:
                 print(f"Welcome {user_account.user.name} to our forum")
             else:
                 print(f"Welcome quest to our forum")

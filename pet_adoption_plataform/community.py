@@ -17,7 +17,7 @@ def showcommunity():
         if choice == "3":
             break
         if choice == "2":
-            if user_account.user != None and user_account.user.logged == True:
+            if user_account.user != None and user_account.user.getlogin() == True:
                 topics.append(clases.Topic.create(user_account.user.name))
                 os.system("cls")
             else:
@@ -51,7 +51,7 @@ def showcommunity():
                         input()
                         os.system("cls")
                         continue
-                    elif user_account.user.logged == False:
+                    elif user_account.user.getlogin() == False:
                         print("You need been logged")
                         input()
                         os.system("cls")
