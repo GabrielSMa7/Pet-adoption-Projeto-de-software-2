@@ -59,6 +59,7 @@ def user_profile():
                 current_user.login(username, password)
             else:
                 print("User not exist")
+                input()
         elif escolha == "3":
             if current_user.getlogin():
                 current_user.changers()

@@ -54,7 +54,7 @@ def showshelter():
 
         if choice == "y":
             print("Enter the name of the shelter you want to see: ")
-            shelter_choiced = input()
+            shelter_choiced = input().lower()
 
             shelter_info = clases.Shelter.search_name_in_list(shelter_choiced, shelters) 
 
@@ -89,7 +89,7 @@ def showshelter():
                 continue
 
             elif choice == "1":
-                pets_availables = clases.Shelter.filters(pet_profile.pets, "shelter", shelter_info.name)
+                pets_availables = clases.Shelter.filters(pet_profile.pets, "shelter_name", shelter_info.name)
 
                 clases.Base.showlist(pets_availables)
 

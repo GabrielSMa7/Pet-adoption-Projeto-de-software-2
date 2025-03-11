@@ -23,27 +23,8 @@ pets = [pet1, pet2, pet3, pet4, pet5, pet6, pet7, pet8, pet9, pet10, pet11, pet1
 def showpets():
     global pets
     os.system("cls")
-    if user_account.current_user.admin == True:
-        while True:
-            print("--Add pet(1)\n--Remove pet(2)\n--Return (3)")
-            choice = input()
-
-            if choice == '1':
-                new_pet = clases.Pet.create(user_account.current_user.shelter)
-                pets.append(new_pet)
-            if choice == '2':
-                filter_pets = clases.Pet.filters(pets, "shelter", user_account.current_user.shelter.name)
-                clases.Pet.showlist(filter_pets)
-                print("Choice one to remove")
-                pet_choiced = input()
-                if clases.Pet.search_name_in_list(pet_choiced, filter_pets) :
-                    pets.remove(pet_choiced)
-                else:
-                    print("Pet not found")
-                    input()
-            if choice == '3':
-                break
-
+    if user_account.current_user:
+        user_account.current_user.adoption_process(pets)
     else:
         while True:
             

@@ -1,4 +1,5 @@
 import os
+from pet_adoption_plataform import adoption
 
 class Base:
     def __init__(self, name):
@@ -57,7 +58,7 @@ class User(Base):
         self.address = address
         self.email = email
         self.__logged = False
-        self.admin = False
+
     
     def getpassword(self):
         return self.__password
@@ -99,6 +100,52 @@ class User(Base):
         email = input("Type your email: ")
 
         return cls(name, password, age, address, email)
+    
+    def adoption_process(self, pets):
+        while True:
+            
+            os.system("cls")
+
+            filter_pets = Pet.filters(pets, "adopted", "False")
+
+            filter_pets = Pet.search(filter_pets)
+
+            os.system("cls")
+
+            Pet.showlist(filter_pets)
+
+            print("See more informations? y/n")
+            info = input().lower()
+
+            if info == "y":
+                print("Enter the name of the pet you want to see: ")
+                pet_choiced = input().lower().capitalize()
+                paw_info = Pet.search_name_in_list(pet_choiced, pets)
+                
+                if paw_info == None:
+                    input("Pet dont found")
+                    continue
+                
+                os.system("cls")
+
+                paw_info.show_info()
+
+                print("--Want to adopt this pet? (1)\n--Return (2)\n--Exit (3)")
+                
+                choice = input()
+                
+                if choice == "2":
+                    continue
+
+                elif choice == "1":
+                    adoption.adoption(paw_info, paw_info.shelter)
+                    break
+                elif choice == "3":
+                    break
+            elif info != "n":
+                continue
+            else:
+                break
 
     def changers(self):
         if input("Change your name? y/n: ").lower() == "y":
@@ -117,9 +164,8 @@ class User(Base):
 
 class Shelter_user(User):
     def __init__(self, name, password, address, email, shelter):
-        super().__init__(name, password, age = 0, address=address, email=email)
+        super().__init__(name, password, age = 0, email=email, address=address)
         del self.age
-        self.admin = True
         self.shelter = shelter
 
     def show_info(self):
@@ -127,6 +173,30 @@ class Shelter_user(User):
             print(f"Name:{self.name}")
             print(f"Email: {self.email}")
             print(f"Address: {self.address}")
+
+    def adoption_process(self, pets):
+        while True:
+                print("--Add pet(1)\n--Remove pet(2)\n--Return (3)")
+                choice = input()
+
+                if choice == '1':
+                    new_pet = Pet.create(self.shelter)
+                    pets.append(new_pet)
+                if choice == '2':
+                    print(self.shelter.name)
+                    filter_pets = Pet.filters(pets, "shelter_name", self.name.lower())
+                    Pet.showlist(filter_pets)
+                    print("Choice one to remove")
+                    pet_choiced = input()
+                    pet_choiced = Pet.search_name_in_list(pet_choiced, filter_pets)
+                    if pet_choiced:
+                        pets.remove(pet_choiced)
+                    else:
+                        print("Pet not found")
+                        input()
+                        os.system("cls")
+                if choice == '3':
+                    break
 
     
 
@@ -139,6 +209,7 @@ class Pet(Base):
         self.size = size        
         self.type = type
         self.shelter = shelter
+        self.shelter_name = shelter.name
         shelter.pets += 1
         self.adopted = adopted
 
